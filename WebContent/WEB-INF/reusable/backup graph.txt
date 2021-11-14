@@ -1,0 +1,131 @@
+
+var graphObj;
+
+function loadGraph(graph){
+
+	graphObj=graph;
+
+	sigma.utils.pkg('sigma.canvas.nodes');
+	sigma.utils.pkg('sigma.canvas.edges');
+
+
+	sigma.canvas.edges.boundary = function(edge, source, target, context, settings) {
+		var color = '#009647',
+		prefix = settings('prefix') || '',
+		edgeColor = settings('edgeColor');
+
+		context.strokeStyle = color;
+		context.lineWidth = edge[prefix + 'size'] || 1;
+		context.beginPath();
+		var startX = source[prefix + 'x'];
+		var endX = target[prefix + 'x'];
+		var ray = (endX - startX)/2;
+		context.arc(source[prefix + 'x']+ray, source[prefix + 'y'], ray, 0, 2*Math.PI, true);
+
+		context.stroke();
+	};
+
+	sigma.canvas.edges.sector_edge = function(edge, source, target, context, settings) {
+		var color = '#000FF0',
+		prefix = settings('prefix') || '',
+		edgeColor = settings('edgeColor');
+
+		context.strokeStyle = color;
+		context.lineWidth = edge[prefix + 'size'] || 1;
+		context.beginPath();
+		context.moveTo(source[prefix + 'x'],source[prefix + 'y']);
+		context.lineTo(target[prefix + 'x'],target[prefix + 'y']);
+		context.stroke();
+	};
+	
+	
+
+	sigma.canvas.nodes.image = (function() {
+		var _cache = {}, _loading = {}, _callbacks = {};
+
+		// Return the renderer itself:
+		var renderer = function(node, context, settings) {
+
+			var args = arguments, prefix = settings('prefix') || '', size = node[prefix
+			                                                                     + 'size'], color = node.color
+			                                                                     || settings('color'), url = node.url;
+
+			if (_cache[url]) {
+				context.save();
+
+				// Draw the clipping disc:
+				context.beginPath();
+				context.arc(node[prefix + 'x'], node[prefix + 'y'], node[prefix
+				                                                         + 'size'], 0, Math.PI * 2, true);
+				context.closePath();
+				context.clip();
+
+				// Draw the image
+				context.drawImage(_cache[url], node[prefix + 'x'] - size,
+						node[prefix + 'y'] - size, 2 * size, 2 * size);
+
+				// Quit the "clipping mode":
+				context.restore();
+
+				// Draw the border:
+				context.beginPath();
+				context.arc(node[prefix + 'x'], node[prefix + 'y'], node[prefix
+				                                                         + 'size'], 0, Math.PI * 2, true);
+				context.lineWidth = size / 9;
+				context.strokeStyle = node.color
+				|| settings('defaultNodeColor');
+				context.stroke();
+			} else {
+				sigma.canvas.nodes.image.cache(url);
+				sigma.canvas.nodes.def.apply(sigma.canvas.nodes, args);
+			}
+
+		};
+
+		// Let's add a public method to cache images, to make it possible to
+		// preload images before the initial rendering:
+		renderer.cache = function(url, callback) {
+			if (callback)
+				_callbacks[url] = callback;
+
+			if (_loading[url])
+				return;
+
+			var img = new Image();
+
+			img.onload = function() {
+				_loading[url] = false;
+				_cache[url] = img;
+
+				if (_callbacks[url]) {
+					_callbacks[url].call(this, img);
+					delete _callbacks[url];
+				}
+			};
+
+			_loading[url] = true;
+			img.src = url;
+		};
+
+		return renderer;
+	})();
+
+	s = new sigma({
+		graph : graph,
+		renderer : {
+			container : document.getElementById('container'),
+			type : 'canvas'
+		},
+		settings : {
+			minEdgeSize : 1,
+			minNodeSize : 0,
+			maxEdgeSize : graph['maxEdgeSize'],
+			maxNodeSize : 30
+		}
+	});
+
+
+
+	s.refresh();
+
+}

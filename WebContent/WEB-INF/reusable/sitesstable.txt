@@ -1,0 +1,20 @@
+<div id='sitesstable'>
+<h3>Select destination Regions<h3>
+<table style='width:100%'>
+		<tr>
+		<th>Select</th>
+		<th>Name</th>
+		</tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Perugia</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Assisi</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Terni</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Orvieto</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Trasimeno</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Gubbio</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Foligno</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Spoleto</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Todi</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Valnerina</td></tr>
+		<tr><td><input type='checkbox' name='query_myTextEditBox'></td><td>Amelia</td></tr>
+		</table>
+		</div>

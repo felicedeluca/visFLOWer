@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
+<link rel="stylesheet" href="style/jquerycss/jquery-ui.theme.min.css">
+
+<link rel="stylesheet" href="style/jquerycss/jquery-ui.css">
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+<script src="lib/d3/map/datamaps.world.min.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+
+<script type="text/javascript" src="lib/d3/d3chart.js"></script>
+<script type="text/javascript" src="lib/d3/plugin/fisheye/fisheye.js"></script>
+
+<script type="text/javascript" src="lib/functions.js"></script>
+<script type="text/javascript" src="lib/graph.js"></script>
+<script type="text/javascript" src="lib/utilities.js"></script>
+<script type="text/javascript" src="lib/sigmajs/customEdges.js"></script>
+<script type="text/javascript" src="lib/sigmajs/customNodes.js"></script>
+<script type="text/javascript" src="lib/sigmajs/legend.js"></script>
+<script type="text/javascript" src="lib/sigmajs/customGraphActions.js"></script>
+<script type="text/javascript" src="lib/sigmajs/customPlugins.js"></script>
+<script type="text/javascript" src="lib/sigmajs/utils/sigma.renderers.snapshot.js"></script>
+
+
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.0.3/sigma.min.js"></script>
+<script src="lib/sigma.parsers.json.min.js"></script>
+<script src="lib/sigma.plugins.filter.js"></script>
+
+
+
+<title>VisFLOWer</title>
+
+
+</head>
+
+<body onload="load()">
+	
+	<div id='header'>
+		
+	</div>
+
+	<div id='leftsidebar'>
+	<div id="spinner" class="spinner" style="display:none;">
+    <img id="img-spinner" src="img/spinner.gif" alt="Loading"/>
+	</div></div>
+	<div id='rightsidebar'></div>
+	<div id='mastercontainer'>
+		
+		<canvas id="canvas2"></canvas>
+		<div id="container">
+	
+		</div>
+		<!-- <div id="moreinfo"></div> -->
+		<div id="dialog" title="Info"></div>
+	</div>
+
+	
+	
+	<div id="footer">VisFLOWer</div>
+
+</body>
+</html>
